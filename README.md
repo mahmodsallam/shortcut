@@ -12,7 +12,7 @@ Hilt is the latest attempt from Google to attempt to prevent you from cutting yo
 - Incorporate libraries to simplify the amount of code you need to write
 
 ## Use case
-<img src="dagger.png" width="250" margins="5px"> 
+<img src="dagger.jpg" width="250" margins="5px"> 
 
 ## Screenshots
 <img src="1.png" width="150" margins="5px">
