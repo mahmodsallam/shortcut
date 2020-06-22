@@ -1,18 +1,25 @@
-# Dagger-Hilt-Android
 
+# Dagger-Hilt-Android
 ## Project Overview
-Hilt is the latest attempt from Google to attempt to prevent you from cutting yourself when using Dagger.
+
+Simple demo for using the new Google library **Hilt** for dependency injection 
+
+This app uses the API from [mockapi.io](https://5e510330f2c0d300147c034c.mockapi.io)
+ 
  
 ## Why this project 
 
+Hilt is the latest attempt from Google to attempt to prevent you from cutting yourself when using Dagger.
+So i decided to try it out in a small demo app 
+
 ## What I learned
-- Fetch data from the Internet using Retrofit 2.0
-- Use  MVVM, Repository android architecture pattern.
-- Use adapters and custom list layouts to populate list views
-- Incorporate libraries to simplify the amount of code you need to write
+- Hilt for dependency injection.
+- Understand some concepts in Dagger2.
+- Incorporate libraries to simplify the amount of code you need to write.
 
 ## Use case
-<img src="dagger.jpg" width="250" margins="5px"> 
+No @component annotation any more 
+<img src="dagger.jpg"  margins="5px"> 
 
 ## Screenshots
 <img src="1.png" width="150" margins="5px">
