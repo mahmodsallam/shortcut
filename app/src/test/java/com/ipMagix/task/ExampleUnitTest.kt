@@ -1,4 +1,4 @@
-package com.dagger.hilt
+package com.ipMagix.task
 
 import org.junit.Test
 

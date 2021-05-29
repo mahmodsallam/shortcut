@@ -1,8 +1,6 @@
-package com.dagger.hilt.di
+package com.ipMagix.task.di
 
-import com.dagger.hilt.BuildConfig
-import com.dagger.hilt.data.remote.UsersRemoteDS
-import com.dagger.hilt.data.repository.UsersRepository
+import com.ipMagix.task.data.remote.MoviesRemoteDS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,10 +13,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
-class ApplicationModule {
+class NetworkModule {
 
     @Provides
-    fun provideBaseUrl() = "https://5e510330f2c0d300147c034c.mockapi.io/"
+    fun provideBaseUrl() = "https://www.flickr.com/services/"
 
     @Provides
     @Singleton
@@ -26,7 +24,7 @@ class ApplicationModule {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
+            .addNetworkInterceptor(loggingInterceptor)
             .build()
     }
 
@@ -43,9 +41,6 @@ class ApplicationModule {
 
 
     @Provides
-    fun provideUsersRemoteDS(retrofit: Retrofit): UsersRemoteDS =
-        retrofit.create(UsersRemoteDS::class.java)
-
-    @Provides
-    fun provideUsersRepository(usersRemoteDS: UsersRemoteDS) = UsersRepository(usersRemoteDS)
+    fun provideMoviesRemoteDS(retrofit: Retrofit): MoviesRemoteDS =
+        retrofit.create(MoviesRemoteDS::class.java)
 }

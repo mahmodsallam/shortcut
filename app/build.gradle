@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.dagger.hilt"
+        applicationId "com.ipMagix.task"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -32,6 +32,9 @@ android {
     // work-runtime-ktx 2.1.0 and above now requires Java 8
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    buildFeatures {
+        dataBinding true
     }
 }
 

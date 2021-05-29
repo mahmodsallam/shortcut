@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Dagger-Hilt"
+rootProject.name = "ipmagix"

@@ -1,8 +1,8 @@
-package com.dagger.hilt.data.remote
+package com.ipMagix.task.data.remote
 
 import com.squareup.moshi.Json
 
-data class User(
+data class Movie(
     @Json(name = "id")
     val id: Int = 0,
     @Json(name = "name")
