@@ -1,14 +1,20 @@
 package com.ipMagix.task.di
 
+import com.ipMagix.task.App
 import com.ipMagix.task.data.remote.MoviesRemoteDS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import okhttp3.Cache
+import okhttp3.CacheControl
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.io.File
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -24,7 +30,10 @@ class NetworkModule {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
-            .addNetworkInterceptor(loggingInterceptor)
+            .addNetworkInterceptor(networkInterceptor)
+            .addInterceptor(offlineInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .cache(cache)
             .build()
     }
 
@@ -43,4 +52,37 @@ class NetworkModule {
     @Provides
     fun provideMoviesRemoteDS(retrofit: Retrofit): MoviesRemoteDS =
         retrofit.create(MoviesRemoteDS::class.java)
+
+    private val offlineInterceptor: Interceptor
+        get() = Interceptor { chain ->
+            var request = chain.request()
+            if (!App.hasNetwork()) {
+                val cacheControl = CacheControl.Builder()
+                    .maxStale(7, TimeUnit.DAYS)
+                    .build()
+                request = request.newBuilder()
+                    .removeHeader("Pragma")
+                    .removeHeader("Cache-Control")
+                    .cacheControl(cacheControl)
+                    .build()
+            }
+
+            chain.proceed(request)
+        }
+
+    private val networkInterceptor: Interceptor
+        get() = Interceptor { chain ->
+            val response = chain.proceed(chain.request())
+            val cacheControl = CacheControl.Builder()
+                .maxAge(5, TimeUnit.SECONDS)
+                .build()
+            response.newBuilder()
+                .removeHeader("Pragma")
+                .removeHeader("Cache-Control")
+                .header("Cache-Control", cacheControl.toString())
+                .build()
+        }
+
+    private val cache: Cache
+        get() = Cache(File(App.instance?.cacheDir, "characters"), (15 * 1024 * 1024).toLong())
 }
