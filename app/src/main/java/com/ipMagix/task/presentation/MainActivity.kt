@@ -13,13 +13,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() , MoviesAdapter.PhotoClickListener {
     private val mainViewModel: MainViewModel by viewModels()
-    private lateinit var adapter: MoviesAdapter
+    private  var adapter = MoviesAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mainViewModel.getUsers()
         mainViewModel.usersList.observe(this, Observer {
-            adapter = MoviesAdapter()
             adapter.setMoviesList(it.photos.photo)
             adapter.setContext(this)
             adapter.setPhotoClickListener(this)
@@ -33,4 +32,5 @@ class MainActivity : AppCompatActivity() , MoviesAdapter.PhotoClickListener {
         intent.putExtra("url"  , url)
         startActivity(intent)
     }
+
 }
