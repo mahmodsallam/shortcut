@@ -5,14 +5,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ipMagix.task.data.remote.Movie
 import com.ipMagix.task.data.remote.MoviesResponse
 import com.ipMagix.task.data.repository.MoviesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainViewModel @ViewModelInject constructor(private val moviesRepository: MoviesRepository) :
     ViewModel() {

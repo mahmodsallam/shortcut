@@ -13,6 +13,11 @@ class MoviesAdapter( ) :
     private var  moviesList: List<MoviesResponse.Photos.Photo>?=null
     private lateinit var binding: ItemMovieBinding
     private var context:Context?=null
+    private var photoClickListener:PhotoClickListener?=null
+
+    fun setPhotoClickListener(photoClickListener:PhotoClickListener){
+        this.photoClickListener=photoClickListener
+    }
     fun setMoviesList(moviesList: List<MoviesResponse.Photos.Photo>){
         this.moviesList=moviesList
     }
@@ -36,7 +41,11 @@ class MoviesAdapter( ) :
             Glide.with(context!!).load(url)
                 .into(ivMovie)
         }
+        binding.ivMovie.setOnClickListener { photoClickListener?.onPhotoClickListener(url) }
     }
 
     class MoviesViewHolder(itemView: ItemMovieBinding) : RecyclerView.ViewHolder(itemView.root)
+    interface PhotoClickListener{
+        fun onPhotoClickListener(url:String)
+    }
 }
