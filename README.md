@@ -30,5 +30,4 @@ This app uses the API from [comics](https://xkcd.com/)
 
 
 ## Screenshots
-<img src="https://github.com/mahmodsallam/shortcut/blob/master/app/1.png"  margins="5px">
-<img src="https://github.com/mahmodsallam/shortcut/blob/master/app/2.png"  margins="5px"> 
+<img src="https://github.com/mahmodsallam/shortcut/blob/master/app/1.png" width="250" margins="5px"> <img src="https://github.com/mahmodsallam/shortcut/blob/master/app/2.png" width="250" margins="5px"> 
