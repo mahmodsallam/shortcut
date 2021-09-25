@@ -1,4 +1,4 @@
-package com.ipMagix.task
+package com.shortcut.comics
 
 import org.junit.Test
 

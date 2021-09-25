@@ -1,4 +1,4 @@
-package com.ipMagix.task
+package com.shortcut.comics
 
 import android.app.Application
 import android.content.Context

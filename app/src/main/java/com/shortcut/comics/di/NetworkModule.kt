@@ -1,7 +1,7 @@
-package com.ipMagix.task.di
+package com.shortcut.comics.di
 
-import com.ipMagix.task.App
-import com.ipMagix.task.data.remote.MoviesRemoteDS
+import com.shortcut.comics.App
+import com.shortcut.comics.data.remote.ComicsRemoteDS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +22,7 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Provides
-    fun provideBaseUrl() = "https://www.flickr.com/services/"
+    fun provideBaseUrl() = "https://xkcd.com/"
 
     @Provides
     @Singleton
@@ -50,8 +50,8 @@ class NetworkModule {
 
 
     @Provides
-    fun provideMoviesRemoteDS(retrofit: Retrofit): MoviesRemoteDS =
-        retrofit.create(MoviesRemoteDS::class.java)
+    fun provideComicsRemoteDS(retrofit: Retrofit): ComicsRemoteDS =
+        retrofit.create(ComicsRemoteDS::class.java)
 
     private val offlineInterceptor: Interceptor
         get() = Interceptor { chain ->
