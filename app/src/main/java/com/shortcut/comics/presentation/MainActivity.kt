@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     private lateinit var comicResponse: ComicResponse
+    private var nextCounter = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.usersList.observe(this, Observer {
             binding.layoutComic.visibility = View.VISIBLE
+            binding.btnNext.visibility = View.VISIBLE
             Glide.with(this).load(it.img).into(binding.ivComic)
             binding.tvComicName.text = it.title
             binding.tvComicSaveName.text = it.alt
@@ -43,6 +45,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.layoutComic.setOnClickListener {
             openComicDetails(comicResponse)
+        }
+        binding.btnNext.setOnClickListener {
+            getNextComic()
         }
     }
 
@@ -55,6 +60,11 @@ class MainActivity : AppCompatActivity() {
         bundle.putString(Constants.DESC, comicResponse.transcript)
         intent.putExtras(bundle)
         startActivity(intent)
+    }
+
+    private fun getNextComic(){
+        nextCounter++
+        mainViewModel.getComicByNumber(nextCounter.toString())
     }
 
 }
